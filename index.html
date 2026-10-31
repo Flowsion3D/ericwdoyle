@@ -15,7 +15,7 @@ footer{color:#727f74;font-size:12px;line-height:1.8;padding:37px 0 65px}
 <script>
 (function(){
   var p = new URLSearchParams(location.search).get('votes');
-  if(p && /^[01-](?:[.][01-]){5}$/.test(p)){
+  if(p && /^(?:-1|0|1)(?:\.(?:-1|0|1)){5}$/.test(p)){
     location.replace('./round-one.html' + location.search + location.hash);
   }
 })();
