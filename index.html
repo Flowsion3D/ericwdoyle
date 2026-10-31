@@ -5,15 +5,262 @@
 header{background:var(--forest);color:white}header .wrap{padding-top:27px;padding-bottom:70px}nav{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-bottom:20px;border-bottom:1px solid #5c7065}.mark{font-size:11px;letter-spacing:.24em;font-weight:800}.season{font-size:10px;letter-spacing:.16em;color:#d2c0a7}.hero{display:grid;grid-template-columns:1.6fr .7fr;gap:40px;align-items:end;padding-top:75px}.kicker{color:var(--sand);font-size:11px;font-weight:750;letter-spacing:.2em}.hero h1{font-family:Georgia,Times,serif;font-size:clamp(51px,8vw,103px);line-height:.99;letter-spacing:-.045em;font-weight:400;margin:18px 0 24px}.lead{color:#dde1da;line-height:1.72;max-width:650px;font-size:16px;margin:0}.aside{border-left:1px solid #66766c;padding:0 0 0 24px;color:#d2dacf;font-size:14px;line-height:1.7}.aside strong{color:white}.intro{padding:42px 0 27px;display:flex;align-items:end;justify-content:space-between;gap:30px}.intro h2{font-size:clamp(29px,4vw,44px);font-family:Georgia,Times,serif;letter-spacing:-.035em;font-weight:400;margin:8px 0 0}.intro p{max-width:425px;color:var(--quiet);font-size:13px;line-height:1.7;margin:0}.filters{display:flex;flex-wrap:wrap;gap:9px;margin-bottom:25px}.filter{border:1px solid #cbd2c8;background:transparent;color:#374d3e;border-radius:25px;padding:10px 16px;font-weight:700;font-size:12px;cursor:pointer}.filter[aria-pressed=true]{background:var(--forest);color:white;border-color:var(--forest)}
 .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:21px}.card{background:white;border:1px solid var(--line);border-radius:8px;overflow:hidden;display:flex;flex-direction:column;min-width:0}.card[hidden]{display:none}.photo{background:#f1f1ef;aspect-ratio:1/1.08;display:flex;align-items:center;justify-content:center;overflow:hidden;text-decoration:none}.photo img{width:100%;height:100%;object-fit:contain;display:block;transition:transform .2s ease}.card:hover .photo img{transform:scale(1.025)}.photo-fallback{color:#4c5e50;text-align:center;padding:35px;line-height:1.7}.photo-fallback[hidden]{display:none}.photo-fallback small{display:block;margin-top:10px}.details{padding:23px;display:flex;flex-direction:column;flex:1}.tag{font-weight:800;color:#99764c;font-size:10px;letter-spacing:.14em}.brand{font-size:10px;letter-spacing:.18em;font-weight:700;color:#7b8279;margin-top:19px}.name-price{display:flex;gap:12px;align-items:baseline;justify-content:space-between}.name-price h3{font-size:25px;font-family:Georgia,Times,serif;font-weight:400;line-height:1.12;letter-spacing:-.027em;margin:8px 0 7px}.name-price strong{font-size:13px;white-space:nowrap}.shade{margin:0;color:#8a9087;font-size:12px}.description{margin:20px 0 12px;font-size:13px;color:#45544a;line-height:1.65}.note{color:#767f75;font-size:12px;line-height:1.55;margin:0 0 23px}.shop{display:flex;gap:5px;align-items:center;justify-content:space-between;background:var(--forest);color:white;text-decoration:none;border-radius:5px;padding:13px 14px;font-weight:700;font-size:12px;margin-top:auto}.shop:hover{background:#344c3f}.footer{padding:43px 0 70px;font-size:12px;color:#778078;line-height:1.8}.footer strong{color:#34443a}.footnote{border-top:1px solid #d8ded5;margin-top:23px;padding-top:18px}
 @media(max-width:920px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.hero{grid-template-columns:1fr}.aside{max-width:650px}.intro{align-items:start;flex-direction:column;gap:12px}}@media(max-width:560px){.wrap{width:calc(100% - 30px)}header .wrap{padding-bottom:44px}.hero{padding-top:51px;gap:23px}.hero h1{font-size:clamp(49px,12vw,67px)}.lead{font-size:15px}.intro{padding:36px 0 22px}.grid{grid-template-columns:1fr;gap:17px}.photo{aspect-ratio:1/0.98}.details{padding:20px}}@media print{header{color:#192e20;background:white}.lead,.aside,.kicker{color:#192e20}.filters{display:none}.grid{grid-template-columns:repeat(2,1fr)}.card{break-inside:avoid}.shop{color:#192e20;background:white}.wrap{max-width:none}.photo{aspect-ratio:1/.8}}
+
+/* Feedback interactions */
+[hidden]{display:none!important}
+.feedback-explainer{display:flex;align-items:center;gap:15px;background:#eaece6;border:1px solid #d7dfd5;border-radius:8px;padding:16px 19px;margin:0 0 24px;color:#34473c}
+.explainer-icon{font-family:Georgia,serif;font-size:31px;line-height:1;color:#947855;flex-shrink:0}
+.feedback-explainer strong,.feedback-explainer span{display:block}
+.feedback-explainer strong{font-size:13px;margin:0 0 3px}
+.feedback-explainer span{font-size:12px;line-height:1.55}
+.rating{border-top:1px solid var(--line);padding-top:17px;margin-top:2px}
+.rating-label{font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#6f796e;margin-bottom:11px}
+.rating-buttons{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.vote{appearance:none;display:flex;align-items:center;justify-content:center;gap:8px;border:1px solid #cdd5cb;background:#fff;color:#536458;border-radius:6px;padding:12px 8px;font-size:12px;font-weight:700;cursor:pointer;min-height:44px;transition:background .15s,border-color .15s}
+.vote:hover{border-color:#7d907e;background:#f5f7f1}
+.vote:focus-visible,.filter:focus-visible,.shop:focus-visible,.share-feedback:focus-visible,.copy-feedback:focus-visible{outline:3px solid #b99565;outline-offset:3px}
+.vote-up[aria-pressed="true"]{background:#e0efe0;border-color:#67956a;color:#275b32}
+.vote-down[aria-pressed="true"]{background:#f4e7e3;border-color:#b98978;color:#84432f}
+.vote-symbol{font-size:17px;line-height:1}
+.vote-status{font-size:11px;color:#69766b;margin-top:7px;min-height:0}
+.vote-status:empty{display:none}
+.readonly-vote{border-radius:6px;padding:12px 14px;font-size:13px;font-weight:750;background:#f0f1ed;color:#667066;text-align:center}
+.readonly-vote.liked{background:#e0efe0;color:#275b32}
+.readonly-vote.passed{background:#f4e7e3;color:#84432f}
+.feedback-panel{margin-top:34px;border:1px solid #ccd6cd;border-radius:10px;background:#e8eee7;padding:32px 34px}
+.feedback-panel-top{display:flex;justify-content:space-between;gap:18px;align-items:center}
+.feedback-overline,.review-eyebrow{font-size:10px;letter-spacing:.18em;color:#7f694b;font-weight:800}
+.feedback-panel h2,.review-banner h2{font-family:Georgia,serif;font-size:clamp(26px,4vw,38px);font-weight:400;letter-spacing:-.035em;margin:7px 0 7px}
+#feedbackCount{font-size:13px;color:#59695f;margin:0;line-height:1.6}
+.rating-tally{display:flex;gap:24px;color:#4b604f;white-space:nowrap}
+.rating-tally div{display:flex;flex-direction:column;text-align:center;gap:3px}
+.rating-tally strong{font-family:Georgia,serif;font-size:38px;font-weight:400}
+.rating-tally span{font-size:11px;font-weight:750}
+.feedback-insight{font-size:13px;line-height:1.7;color:#3c5143;margin:22px 0 24px}
+.feedback-actions{display:flex;flex-wrap:wrap;gap:10px}
+.share-feedback,.copy-feedback{cursor:pointer;border:1px solid var(--forest);background:var(--forest);color:#fff;border-radius:6px;padding:13px 18px;font-size:13px;font-weight:750;min-height:46px}
+.copy-feedback{background:transparent;color:var(--forest)}
+.share-feedback:disabled,.copy-feedback:disabled{opacity:.43;cursor:not-allowed}
+.feedback-privacy{font-size:11px;line-height:1.7;color:#647467;margin:17px 0 0}
+#feedbackMessage{font-size:12px;font-weight:750;margin-top:10px;color:#285d39}
+#feedbackMessage:empty{display:none}
+.review-banner{background:#f4e9d7;border:1px solid #e2d2b8;border-radius:10px;padding:24px 28px;margin-top:30px}
+.review-banner-inner{display:flex;justify-content:space-between;align-items:center;gap:30px}
+.review-banner p{color:#665948;margin:0;font-size:13px;line-height:1.5}
+.restart-link{border:1px solid #967f5d;padding:10px 14px;border-radius:6px;text-decoration:none;font-size:12px;font-weight:700;white-space:nowrap}
+@media(max-width:560px){.feedback-panel{padding:22px 18px}.feedback-panel-top{align-items:start;flex-direction:column}.rating-tally{gap:21px}.feedback-actions{flex-direction:column}.share-feedback,.copy-feedback{width:100%}.review-banner-inner{flex-direction:column;align-items:flex-start;gap:16px}.review-banner{padding:22px 18px}}
 </style></head><body>
 <header><div class="wrap"><nav><span class="mark">THE CITY BOOT EDIT</span><span class="season">WINTER 2026 / CURATED LOOKBOOK</span></nav><div class="hero"><div><span class="kicker">GOOD STYLE, GOOD GRIP</span><h1>Winter boots,<br><em>beautifully done.</em></h1><p class="lead">Six elevated boots for snowy city sidewalks, winter markets and elegant evenings. Proper tread, beautiful materials, and no metal ice studs.</p></div><div class="aside"><strong>The brief</strong><br>Stylish enough for Europe. Comfortable for walking. Real product photos only—no AI-generated boots or illustrations.</div></div></div></header>
-<main class="wrap"><div class="intro"><div><span class="kicker" style="color:#99764c">THE SHORTLIST</span><h2>Find her winter favorite.</h2></div><p>Six real retailer listings. Tap any photograph or button to open the exact product page and see available sizes.</p></div>
+<main class="wrap">
+<section class="review-banner" id="reviewBanner" hidden aria-label="Shared boot feedback"><div class="review-banner-inner"><div><span class="review-eyebrow">SHARED FEEDBACK</span><h2>Here's what she thought.</h2><p id="reviewSummary">Ratings are shown on each boot below.</p></div><a class="restart-link" href="./">Rate these yourself ↗</a></div></section><div class="intro"><div><span class="kicker" style="color:#99764c">THE SHORTLIST</span><h2>Find her winter favorite.</h2></div><p>Six real retailer listings. Tap any photograph or button to open the exact product page and see available sizes.</p></div>
 <div class="filters"><button class="filter" type="button" data-filter="all" aria-pressed="true">All six</button><button class="filter" type="button" data-filter="sleek" aria-pressed="false">Sleek Chelseas</button><button class="filter" type="button" data-filter="warm" aria-pressed="false">Wool &amp; shearling</button><button class="filter" type="button" data-filter="casual" aria-pressed="false">Casual neutral</button></div>
-<section class="grid" aria-label="Shop women's winter boots"><article class="card" data-cat="sleek"><a class="photo" href="https://lacanadienneshoes.com/products/cye-leather-bootie" target="_blank" rel="noopener noreferrer" aria-label="View Cye Leather Chelsea"><img src="https://lacanadienneshoes.com/cdn/shop/files/Cye_lea_black_0.jpg?v=1786043978&amp;width=1111" alt="Official retailer photograph of LA CANADIENNE Cye Leather Chelsea, Black leather" loading="eager" referrerpolicy="no-referrer" onerror="this.hidden=true;this.parentElement.querySelector('.photo-fallback').hidden=false;"><span class="photo-fallback" hidden><b>Image unavailable</b><small>Open the official product listing to see real photos ↗</small></span></a><div class="details"><div class="tag">THE EVERYDAY CITY PICK</div><div class="brand">LA CANADIENNE</div><div class="name-price"><h3>Cye Leather Chelsea</h3><strong>$498</strong></div><p class="shade">Black leather</p><p class="description">Waterproof Italian leather, a sleek Chelsea silhouette, and a lightweight micro-rubber lug sole. This is the closest to a dressy treaded Thursday boot.</p><p class="note">Microfiber lining; not heavily insulated.</p><a class="shop" href="https://lacanadienneshoes.com/products/cye-leather-bootie" target="_blank" rel="noopener noreferrer">View official listing &amp; sizes <span>↗</span></a></div></article>
-<article class="card" data-cat="sleek"><a class="photo" href="https://lacanadienneshoes.com/products/cye-suede-bootie" target="_blank" rel="noopener noreferrer" aria-label="View Cye Suede Chelsea"><img src="https://lacanadienneshoes.com/cdn/shop/files/Cye_SUE_brunette_0.jpg?v=1786044612&amp;width=1600" alt="Official retailer photograph of LA CANADIENNE Cye Suede Chelsea, Brunette suede" loading="eager" referrerpolicy="no-referrer" onerror="this.hidden=true;this.parentElement.querySelector('.photo-fallback').hidden=false;"><span class="photo-fallback" hidden><b>Image unavailable</b><small>Open the official product listing to see real photos ↗</small></span></a><div class="details"><div class="tag">THE BEAUTIFUL BROWN ONE</div><div class="brand">LA CANADIENNE</div><div class="name-price"><h3>Cye Suede Chelsea</h3><strong>$498</strong></div><p class="shade">Brunette suede</p><p class="description">The same refined waterproof Chelsea in rich brunette suede. A standout with camel wool coats, tailored trousers, and denim.</p><p class="note">Lightweight microfiber lining; clean salt residue gently.</p><a class="shop" href="https://lacanadienneshoes.com/products/cye-suede-bootie" target="_blank" rel="noopener noreferrer">View official listing &amp; sizes <span>↗</span></a></div></article>
-<article class="card" data-cat="warm"><a class="photo" href="https://lacanadienneshoes.com/products/delta-shearling-lined-leather-bootie" target="_blank" rel="noopener noreferrer" aria-label="View Delta Shearling Bootie"><img src="https://lacanadienneshoes.com/cdn/shop/files/LAC-DELTA_LSH_black_0.jpg?v=1753795014&amp;width=1600" alt="Official retailer photograph of LA CANADIENNE Delta Shearling Bootie, Black leather" loading="lazy" referrerpolicy="no-referrer" onerror="this.hidden=true;this.parentElement.querySelector('.photo-fallback').hidden=false;"><span class="photo-fallback" hidden><b>Image unavailable</b><small>Open the official product listing to see real photos ↗</small></span></a><div class="details"><div class="tag">THE WARM LUXURY CHOICE</div><div class="brand">LA CANADIENNE</div><div class="name-price"><h3>Delta Shearling Bootie</h3><strong>$575</strong></div><p class="shade">Black leather</p><p class="description">Genuine shearling lining to the toe, waterproof leather, an elegant front zip and a treaded thermoplastic-rubber outsole.</p><p class="note">Brand advises this style may fit small.</p><a class="shop" href="https://lacanadienneshoes.com/products/delta-shearling-lined-leather-bootie" target="_blank" rel="noopener noreferrer">View official listing &amp; sizes <span>↗</span></a></div></article>
-<article class="card" data-cat="warm"><a class="photo" href="https://lacanadienneshoes.com/products/dwayne-shearling-lined-suede-bootie" target="_blank" rel="noopener noreferrer" aria-label="View Dwayne Shearling Bootie"><img src="https://lacanadienneshoes.com/cdn/shop/files/dwayne_sue_black_0.jpg?v=1753799998&amp;width=1600" alt="Official retailer photograph of LA CANADIENNE Dwayne Shearling Bootie, Black suede &amp; cream shearling" loading="lazy" referrerpolicy="no-referrer" onerror="this.hidden=true;this.parentElement.querySelector('.photo-fallback').hidden=false;"><span class="photo-fallback" hidden><b>Image unavailable</b><small>Open the official product listing to see real photos ↗</small></span></a><div class="details"><div class="tag">THE COZY CHIC CHOICE</div><div class="brand">LA CANADIENNE</div><div class="name-price"><h3>Dwayne Shearling Bootie</h3><strong>$585</strong></div><p class="shade">Black suede &amp; cream shearling</p><p class="description">Waterproof suede, genuine shearling and a contrast cuff. Stylish for winter city trips with a substantial rubber sole.</p><p class="note">Back zipper; check fit and zipper operation carefully.</p><a class="shop" href="https://lacanadienneshoes.com/products/dwayne-shearling-lined-suede-bootie" target="_blank" rel="noopener noreferrer">View official listing &amp; sizes <span>↗</span></a></div></article>
-<article class="card" data-cat="warm"><a class="photo" href="https://www.anfibioboots.com/collections/stand-out-stay-warm-women/products/karina" target="_blank" rel="noopener noreferrer" aria-label="View Karina Winter Boot"><img src="https://cdn.shoplightspeed.com/shops/607944/files/67841971/anfibio-anfibio-8116-karina-noir.jpg" alt="Official retailer photograph of ANFIBIO Karina Winter Boot, Black leather" loading="lazy" referrerpolicy="no-referrer" onerror="this.hidden=true;this.parentElement.querySelector('.photo-fallback').hidden=false;"><span class="photo-fallback" hidden><b>Image unavailable</b><small>Open the official product listing to see real photos ↗</small></span></a><div class="details"><div class="tag">THE SNOW-SIDEWALK CHOICE</div><div class="brand">ANFIBIO</div><div class="name-price"><h3>Karina Winter Boot</h3><strong>$445*</strong></div><p class="shade">Black leather</p><p class="description">Made in Canada, with full-grain waterproof leather, natural-wool lining, an inside zipper and a treaded outsole for snowy streets.</p><p class="note">Mid-calf style; more winter-forward than a Chelsea. *Check retailer currency at checkout.</p><a class="shop" href="https://www.anfibioboots.com/collections/stand-out-stay-warm-women/products/karina" target="_blank" rel="noopener noreferrer">View official listing &amp; sizes <span>↗</span></a></div></article>
-<article class="card" data-cat="casual"><a class="photo" href="https://blondo.com/products/natasia" target="_blank" rel="noopener noreferrer" aria-label="View Natasia Bootie"><img src="https://blondo.com/cdn/shop/files/BLONDO_NATASIA_NATA01SD_BONE_PAIR_grande.jpg?v=1762546459" alt="Official retailer photograph of BLONDO Natasia Bootie, Bone leather" loading="lazy" referrerpolicy="no-referrer" onerror="this.hidden=true;this.parentElement.querySelector('.photo-fallback').hidden=false;"><span class="photo-fallback" hidden><b>Image unavailable</b><small>Open the official product listing to see real photos ↗</small></span></a><div class="details"><div class="tag">THE LIGHT NEUTRAL OPTION</div><div class="brand">BLONDO</div><div class="name-price"><h3>Natasia Bootie</h3><strong>$159.95</strong></div><p class="shade">Bone leather</p><p class="description">Waterproof lace-up leather bootie with a soft winter cuff and rubber sole. A casual complement to the polished leather choices.</p><p class="note">Sportier, more casual silhouette.</p><a class="shop" href="https://blondo.com/products/natasia" target="_blank" rel="noopener noreferrer">View official listing &amp; sizes <span>↗</span></a></div></article></section>
+<div class="feedback-explainer" id="feedbackExplainer"><span class="explainer-icon" aria-hidden="true">♡</span><div><strong>Help choose the next round.</strong><span>Tap 👍 or 👎 on each boot. When you're done, send your picks so the next suggestions can match your style.</span></div></div>
+<section class="grid" aria-label="Shop women's winter boots"><article class="card" data-boot="0" data-cat="sleek"><a class="photo" href="https://lacanadienneshoes.com/products/cye-leather-bootie" target="_blank" rel="noopener noreferrer" aria-label="View Cye Leather Chelsea"><img src="https://lacanadienneshoes.com/cdn/shop/files/Cye_lea_black_0.jpg?v=1786043978&amp;width=1111" alt="Official retailer photograph of LA CANADIENNE Cye Leather Chelsea, Black leather" loading="eager" referrerpolicy="no-referrer" onerror="this.hidden=true;this.parentElement.querySelector('.photo-fallback').hidden=false;"><span class="photo-fallback" hidden><b>Image unavailable</b><small>Open the official product listing to see real photos ↗</small></span></a><div class="details"><div class="tag">THE EVERYDAY CITY PICK</div><div class="brand">LA CANADIENNE</div><div class="name-price"><h3>Cye Leather Chelsea</h3><strong>$498</strong></div><p class="shade">Black leather</p><p class="description">Waterproof Italian leather, a sleek Chelsea silhouette, and a lightweight micro-rubber lug sole. This is the closest to a dressy treaded Thursday boot.</p><p class="note">Microfiber lining; not heavily insulated.</p><a class="shop" href="https://lacanadienneshoes.com/products/cye-leather-bootie" target="_blank" rel="noopener noreferrer">View official listing &amp; sizes <span>↗</span></a><div class="rating" role="group" aria-label="Rate Cye Leather Chelsea">
+  <div class="rating-label">Would you wear these?</div>
+  <div class="rating-buttons">
+  <button type="button" class="vote vote-up" data-vote="1" aria-pressed="false" aria-label="Thumbs up for Cye Leather Chelsea"><span class="vote-symbol" aria-hidden="true">👍</span> Love it</button>
+  <button type="button" class="vote vote-down" data-vote="-1" aria-pressed="false" aria-label="Thumbs down for Cye Leather Chelsea"><span class="vote-symbol" aria-hidden="true">👎</span> Not for me</button>
+  </div><div class="vote-status" aria-live="polite"></div></div></div></article>
+<article class="card" data-boot="1" data-cat="sleek"><a class="photo" href="https://lacanadienneshoes.com/products/cye-suede-bootie" target="_blank" rel="noopener noreferrer" aria-label="View Cye Suede Chelsea"><img src="https://lacanadienneshoes.com/cdn/shop/files/Cye_SUE_brunette_0.jpg?v=1786044612&amp;width=1600" alt="Official retailer photograph of LA CANADIENNE Cye Suede Chelsea, Brunette suede" loading="eager" referrerpolicy="no-referrer" onerror="this.hidden=true;this.parentElement.querySelector('.photo-fallback').hidden=false;"><span class="photo-fallback" hidden><b>Image unavailable</b><small>Open the official product listing to see real photos ↗</small></span></a><div class="details"><div class="tag">THE BEAUTIFUL BROWN ONE</div><div class="brand">LA CANADIENNE</div><div class="name-price"><h3>Cye Suede Chelsea</h3><strong>$498</strong></div><p class="shade">Brunette suede</p><p class="description">The same refined waterproof Chelsea in rich brunette suede. A standout with camel wool coats, tailored trousers, and denim.</p><p class="note">Lightweight microfiber lining; clean salt residue gently.</p><a class="shop" href="https://lacanadienneshoes.com/products/cye-suede-bootie" target="_blank" rel="noopener noreferrer">View official listing &amp; sizes <span>↗</span></a><div class="rating" role="group" aria-label="Rate Cye Suede Chelsea">
+  <div class="rating-label">Would you wear these?</div>
+  <div class="rating-buttons">
+  <button type="button" class="vote vote-up" data-vote="1" aria-pressed="false" aria-label="Thumbs up for Cye Suede Chelsea"><span class="vote-symbol" aria-hidden="true">👍</span> Love it</button>
+  <button type="button" class="vote vote-down" data-vote="-1" aria-pressed="false" aria-label="Thumbs down for Cye Suede Chelsea"><span class="vote-symbol" aria-hidden="true">👎</span> Not for me</button>
+  </div><div class="vote-status" aria-live="polite"></div></div></div></article>
+<article class="card" data-boot="2" data-cat="warm"><a class="photo" href="https://lacanadienneshoes.com/products/delta-shearling-lined-leather-bootie" target="_blank" rel="noopener noreferrer" aria-label="View Delta Shearling Bootie"><img src="https://lacanadienneshoes.com/cdn/shop/files/LAC-DELTA_LSH_black_0.jpg?v=1753795014&amp;width=1600" alt="Official retailer photograph of LA CANADIENNE Delta Shearling Bootie, Black leather" loading="lazy" referrerpolicy="no-referrer" onerror="this.hidden=true;this.parentElement.querySelector('.photo-fallback').hidden=false;"><span class="photo-fallback" hidden><b>Image unavailable</b><small>Open the official product listing to see real photos ↗</small></span></a><div class="details"><div class="tag">THE WARM LUXURY CHOICE</div><div class="brand">LA CANADIENNE</div><div class="name-price"><h3>Delta Shearling Bootie</h3><strong>$575</strong></div><p class="shade">Black leather</p><p class="description">Genuine shearling lining to the toe, waterproof leather, an elegant front zip and a treaded thermoplastic-rubber outsole.</p><p class="note">Brand advises this style may fit small.</p><a class="shop" href="https://lacanadienneshoes.com/products/delta-shearling-lined-leather-bootie" target="_blank" rel="noopener noreferrer">View official listing &amp; sizes <span>↗</span></a><div class="rating" role="group" aria-label="Rate Delta Shearling Bootie">
+  <div class="rating-label">Would you wear these?</div>
+  <div class="rating-buttons">
+  <button type="button" class="vote vote-up" data-vote="1" aria-pressed="false" aria-label="Thumbs up for Delta Shearling Bootie"><span class="vote-symbol" aria-hidden="true">👍</span> Love it</button>
+  <button type="button" class="vote vote-down" data-vote="-1" aria-pressed="false" aria-label="Thumbs down for Delta Shearling Bootie"><span class="vote-symbol" aria-hidden="true">👎</span> Not for me</button>
+  </div><div class="vote-status" aria-live="polite"></div></div></div></article>
+<article class="card" data-boot="3" data-cat="warm"><a class="photo" href="https://lacanadienneshoes.com/products/dwayne-shearling-lined-suede-bootie" target="_blank" rel="noopener noreferrer" aria-label="View Dwayne Shearling Bootie"><img src="https://lacanadienneshoes.com/cdn/shop/files/dwayne_sue_black_0.jpg?v=1753799998&amp;width=1600" alt="Official retailer photograph of LA CANADIENNE Dwayne Shearling Bootie, Black suede &amp; cream shearling" loading="lazy" referrerpolicy="no-referrer" onerror="this.hidden=true;this.parentElement.querySelector('.photo-fallback').hidden=false;"><span class="photo-fallback" hidden><b>Image unavailable</b><small>Open the official product listing to see real photos ↗</small></span></a><div class="details"><div class="tag">THE COZY CHIC CHOICE</div><div class="brand">LA CANADIENNE</div><div class="name-price"><h3>Dwayne Shearling Bootie</h3><strong>$585</strong></div><p class="shade">Black suede &amp; cream shearling</p><p class="description">Waterproof suede, genuine shearling and a contrast cuff. Stylish for winter city trips with a substantial rubber sole.</p><p class="note">Back zipper; check fit and zipper operation carefully.</p><a class="shop" href="https://lacanadienneshoes.com/products/dwayne-shearling-lined-suede-bootie" target="_blank" rel="noopener noreferrer">View official listing &amp; sizes <span>↗</span></a><div class="rating" role="group" aria-label="Rate Dwayne Shearling Bootie">
+  <div class="rating-label">Would you wear these?</div>
+  <div class="rating-buttons">
+  <button type="button" class="vote vote-up" data-vote="1" aria-pressed="false" aria-label="Thumbs up for Dwayne Shearling Bootie"><span class="vote-symbol" aria-hidden="true">👍</span> Love it</button>
+  <button type="button" class="vote vote-down" data-vote="-1" aria-pressed="false" aria-label="Thumbs down for Dwayne Shearling Bootie"><span class="vote-symbol" aria-hidden="true">👎</span> Not for me</button>
+  </div><div class="vote-status" aria-live="polite"></div></div></div></article>
+<article class="card" data-boot="4" data-cat="warm"><a class="photo" href="https://www.anfibioboots.com/collections/stand-out-stay-warm-women/products/karina" target="_blank" rel="noopener noreferrer" aria-label="View Karina Winter Boot"><img src="https://cdn.shoplightspeed.com/shops/607944/files/67841971/anfibio-anfibio-8116-karina-noir.jpg" alt="Official retailer photograph of ANFIBIO Karina Winter Boot, Black leather" loading="lazy" referrerpolicy="no-referrer" onerror="this.hidden=true;this.parentElement.querySelector('.photo-fallback').hidden=false;"><span class="photo-fallback" hidden><b>Image unavailable</b><small>Open the official product listing to see real photos ↗</small></span></a><div class="details"><div class="tag">THE SNOW-SIDEWALK CHOICE</div><div class="brand">ANFIBIO</div><div class="name-price"><h3>Karina Winter Boot</h3><strong>$445*</strong></div><p class="shade">Black leather</p><p class="description">Made in Canada, with full-grain waterproof leather, natural-wool lining, an inside zipper and a treaded outsole for snowy streets.</p><p class="note">Mid-calf style; more winter-forward than a Chelsea. *Check retailer currency at checkout.</p><a class="shop" href="https://www.anfibioboots.com/collections/stand-out-stay-warm-women/products/karina" target="_blank" rel="noopener noreferrer">View official listing &amp; sizes <span>↗</span></a><div class="rating" role="group" aria-label="Rate Karina Winter Boot">
+  <div class="rating-label">Would you wear these?</div>
+  <div class="rating-buttons">
+  <button type="button" class="vote vote-up" data-vote="1" aria-pressed="false" aria-label="Thumbs up for Karina Winter Boot"><span class="vote-symbol" aria-hidden="true">👍</span> Love it</button>
+  <button type="button" class="vote vote-down" data-vote="-1" aria-pressed="false" aria-label="Thumbs down for Karina Winter Boot"><span class="vote-symbol" aria-hidden="true">👎</span> Not for me</button>
+  </div><div class="vote-status" aria-live="polite"></div></div></div></article>
+<article class="card" data-boot="5" data-cat="casual"><a class="photo" href="https://blondo.com/products/natasia" target="_blank" rel="noopener noreferrer" aria-label="View Natasia Bootie"><img src="https://blondo.com/cdn/shop/files/BLONDO_NATASIA_NATA01SD_BONE_PAIR_grande.jpg?v=1762546459" alt="Official retailer photograph of BLONDO Natasia Bootie, Bone leather" loading="lazy" referrerpolicy="no-referrer" onerror="this.hidden=true;this.parentElement.querySelector('.photo-fallback').hidden=false;"><span class="photo-fallback" hidden><b>Image unavailable</b><small>Open the official product listing to see real photos ↗</small></span></a><div class="details"><div class="tag">THE LIGHT NEUTRAL OPTION</div><div class="brand">BLONDO</div><div class="name-price"><h3>Natasia Bootie</h3><strong>$159.95</strong></div><p class="shade">Bone leather</p><p class="description">Waterproof lace-up leather bootie with a soft winter cuff and rubber sole. A casual complement to the polished leather choices.</p><p class="note">Sportier, more casual silhouette.</p><a class="shop" href="https://blondo.com/products/natasia" target="_blank" rel="noopener noreferrer">View official listing &amp; sizes <span>↗</span></a><div class="rating" role="group" aria-label="Rate Natasia Bootie">
+  <div class="rating-label">Would you wear these?</div>
+  <div class="rating-buttons">
+  <button type="button" class="vote vote-up" data-vote="1" aria-pressed="false" aria-label="Thumbs up for Natasia Bootie"><span class="vote-symbol" aria-hidden="true">👍</span> Love it</button>
+  <button type="button" class="vote vote-down" data-vote="-1" aria-pressed="false" aria-label="Thumbs down for Natasia Bootie"><span class="vote-symbol" aria-hidden="true">👎</span> Not for me</button>
+  </div><div class="vote-status" aria-live="polite"></div></div></div></article></section>
+<section class="feedback-panel" id="feedbackPanel" aria-label="Your boot feedback">
+<div class="feedback-panel-top"><div><div class="feedback-overline">YOUR SHORTLIST</div><h2 id="feedbackHeading">Which ones feel like you?</h2><p id="feedbackCount" aria-live="polite">No boots rated yet.</p></div><div class="rating-tally"><div><strong id="likesCount">0</strong><span>👍 Loved</span></div><div><strong id="passesCount">0</strong><span>👎 Passed</span></div></div></div>
+<p class="feedback-insight" id="feedbackInsight">Your likes and dislikes will help narrow down the next round of boots.</p>
+<div class="feedback-actions"><button type="button" id="shareFeedback" class="share-feedback" disabled>Send my picks ↗</button><button type="button" id="copyFeedback" class="copy-feedback" disabled>Copy feedback for more suggestions</button></div>
+<p class="feedback-privacy" id="feedbackPrivacy">Your ratings stay in this browser until you share them. To send them, tap <strong>Send my picks</strong>, choose Messages, and text the feedback link. No sign-in needed.</p>
+<div id="feedbackMessage" role="status" aria-live="polite"></div>
+</section>
 <footer class="footer"><p><strong>Winter traction:</strong> Rubber lugs can help on snow and slush, but no ordinary lug sole is dependable on smooth, polished ice. None of the boots here has metal ice-gripping studs.</p><p class="footnote"><strong>Photo and price transparency:</strong> Photos are authentic manufacturer / retailer images linked directly from their websites, not synthetic renderings. Internet access is required and retailers can change image URLs; if a photo is unavailable, follow its direct product link. Prices reflect listed prices at research time and may change; Anfibio’s listing is $445 (verify currency at checkout). This guide is independent and not sponsored.</p></footer>
-</main><script>document.querySelectorAll('.filter').forEach(b=>b.addEventListener('click',()=>{const v=b.dataset.filter;document.querySelectorAll('.filter').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));document.querySelectorAll('.card').forEach(c=>{c.hidden=v!=='all'&&c.dataset.cat!==v})}));</script></body></html>
+</main><script>document.querySelectorAll('.filter').forEach(b=>b.addEventListener('click',()=>{const v=b.dataset.filter;document.querySelectorAll('.filter').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));document.querySelectorAll('.card').forEach(c=>{c.hidden=v!=='all'&&c.dataset.cat!==v})}));</script>
+<script>
+(function () {
+  'use strict';
+  const STORAGE_KEY = 'cityWinterBootVotes_v1';
+  const boots = [
+    {name:'La Canadienne Cye Leather Chelsea',category:'sleek Chelsea',color:'black',warm:false},
+    {name:'La Canadienne Cye Suede Chelsea',category:'sleek Chelsea',color:'brown',warm:false},
+    {name:'La Canadienne Delta Shearling Bootie',category:'warm insulated',color:'black',warm:true},
+    {name:'La Canadienne Dwayne Shearling Bootie',category:'warm insulated',color:'black',warm:true},
+    {name:'Anfibio Karina Winter Boot',category:'warm insulated',color:'black',warm:true},
+    {name:'Blondo Natasia Bootie',category:'casual light',color:'light',warm:false}
+  ];
+  const cards = [...document.querySelectorAll('.card[data-boot]')];
+  if (cards.length !== boots.length) return;
+  const isValid = v => Array.isArray(v) && v.length === boots.length && v.every(n => n === -1 || n === 0 || n === 1);
+  let votes = boots.map(() => 0);
+  const params = new URLSearchParams(location.search);
+  const rawShared = params.get('votes');
+  let review = false;
+  if (rawShared !== null) {
+    const parsed = rawShared.split('.').map(Number);
+    if (isValid(parsed)) { votes = parsed; review = true; }
+  }
+  if (!review) {
+    try { const stored = JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null'); if (isValid(stored)) votes = stored; }
+    catch (_) { /* Browser storage may be unavailable; sharing still works. */ }
+  }
+  const count = () => votes.filter(v => v !== 0).length;
+  const liked = () => votes.filter(v => v === 1).length;
+  const passed = () => votes.filter(v => v === -1).length;
+  function feedbackURL() {
+    const u = new URL(location.href);
+    u.search = ''; u.hash = '';
+    u.searchParams.set('votes',votes.join('.'));
+    return u.toString();
+  }
+  function description() {
+    const likes = boots.filter((_, i) => votes[i] === 1).map(b => b.name);
+    const noes = boots.filter((_, i) => votes[i] === -1).map(b => b.name);
+    const unrated = boots.filter((_, i) => votes[i] === 0).map(b => b.name);
+    const signals = [];
+    [
+      {label:'sleek Chelsea silhouettes',indices:[0,1]},
+      {label:'warm shearling or wool styles',indices:[2,3,4]},
+      {label:'light-colored casual boots',indices:[5]}
+    ].forEach(group => {
+      const up = group.indices.filter(i => votes[i] === 1).length;
+      const down = group.indices.filter(i => votes[i] === -1).length;
+      if (up || down) signals.push(group.label+': '+up+' liked / '+down+' passed');
+    });
+    return 'Winter boot preferences\n\n'+
+      '👍 LOVE ('+likes.length+'): '+(likes.join('; ') || 'None yet')+'\n'+
+      '👎 PASS ('+noes.length+'): '+(noes.join('; ') || 'None yet')+'\n'+
+      'NOT RATED: '+(unrated.join('; ') || 'None')+'\n\n'+
+      'Style signals: '+(signals.join(' | ') || 'Not enough votes yet')+'\n\n'+
+      'Please recommend more high-quality, elegant, winter-appropriate city boots with good tread, no metal studs. Use these positive and negative examples to refine style, color and insulation. Include authentic product images and purchase links.\n'+
+      'Review the ratings here: '+feedbackURL();
+  }
+  function insight() {
+    if (count() === 0) return 'Your likes and dislikes will help narrow down the next round of boots.';
+    if (count() === 1) return 'Great start. A few more votes will help reveal which styles to look for next.';
+    const groups = [
+      {name:'sleek Chelsea boots',indexes:[0,1]},
+      {name:'warm shearling/wool boots',indexes:[2,3,4]},
+      {name:'light casual boots',indexes:[5]}
+    ];
+    const scored = groups.map(g => ({name:g.name, up:g.indexes.filter(i=>votes[i]===1).length, down:g.indexes.filter(i=>votes[i]===-1).length}));
+    const positive = scored.filter(g => g.up > 0 && g.up > g.down).map(g => g.name);
+    const negative = scored.filter(g => g.down > 0 && g.down > g.up).map(g => g.name);
+    let s = positive.length ? 'Leaning toward: '+positive.join(' and ')+'.' : 'No clear favorite category yet.';
+    if (negative.length) s += ' Less interested in: '+negative.join(' and ')+'.';
+    return s+' Share these exact votes to guide the next recommendations.';
+  }
+  function paint() {
+    cards.forEach((card, i) => {
+      const rating = card.querySelector('.rating');
+      if (!rating) return;
+      if (review) {
+        const v = votes[i];
+        rating.innerHTML = '<div class="rating-label">Her verdict</div><div class="readonly-vote '+(v===1?'liked':v===-1?'passed':'')+'">'+(v===1?'👍 Loved it':v===-1?'👎 Not for her':'Not rated')+'</div>';
+      } else {
+        rating.querySelectorAll('[data-vote]').forEach(button => {
+          button.setAttribute('aria-pressed',String(Number(button.dataset.vote) === votes[i]));
+        });
+        const status=rating.querySelector('.vote-status');
+        status.textContent = votes[i]===1 ? 'Added to favorites' : votes[i]===-1 ? 'Marked as a pass' : '';
+      }
+    });
+    const c=count();
+    document.getElementById('feedbackCount').textContent =
+      c+' of '+boots.length+' boots rated'+(c===boots.length?' — all done!':'.');
+    document.getElementById('likesCount').textContent = liked();
+    document.getElementById('passesCount').textContent = passed();
+    document.getElementById('feedbackInsight').textContent = insight();
+    document.getElementById('shareFeedback').disabled = c===0;
+    document.getElementById('copyFeedback').disabled = c===0;
+    if (review) {
+      document.getElementById('reviewBanner').hidden = false;
+      document.getElementById('reviewSummary').textContent =
+        liked()+' loved · '+passed()+' passed · '+(boots.length-c)+' not rated.';
+      document.getElementById('feedbackExplainer').hidden = true;
+      document.getElementById('feedbackHeading').textContent = 'Her style preferences, at a glance.';
+      document.getElementById('shareFeedback').hidden = true;
+      document.getElementById('feedbackPrivacy').textContent =
+        'This link contains a snapshot of the votes, not a live database. Copy the summary to request a more targeted round of recommendations.';
+    }
+  }
+  if (!review) {
+    cards.forEach((card, i) => card.querySelectorAll('[data-vote]').forEach(button => {
+      button.addEventListener('click', () => {
+        const value = Number(button.dataset.vote);
+        votes[i] = votes[i] === value ? 0 : value;
+        try { localStorage.setItem(STORAGE_KEY,JSON.stringify(votes)); } catch (_) {}
+        const status=document.getElementById('feedbackMessage');
+        status.textContent = '';
+        paint();
+      });
+    }));
+  }
+  function message(s) {
+    document.getElementById('feedbackMessage').textContent = s;
+  }
+  async function copyText(text) {
+    try {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(text);
+        return true;
+      }
+    } catch (_) {}
+    const box = document.createElement('textarea');
+    box.value = text;
+    box.setAttribute('readonly','');
+    box.style.cssText='position:fixed;opacity:0;left:-9999px';
+    document.body.appendChild(box);
+    box.select();
+    let ok = false;
+    try { ok = document.execCommand('copy'); } catch (_) {}
+    box.remove();
+    return ok;
+  }
+  document.getElementById('shareFeedback').addEventListener('click',async () => {
+    if (!count()) return;
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title:'Winter boot ratings',
+          text:'My winter boot picks: '+liked()+' loved, '+passed()+' passed. Open this link to see my ratings.',
+          url:feedbackURL()
+        });
+        message('Share sheet opened. Send the link to the person choosing boots with you.');
+        return;
+      } catch (e) { if (e && e.name === 'AbortError') return; }
+    }
+    const ok=await copyText(feedbackURL());
+    message(ok?'Feedback link copied! Paste it into a text message.':'Copy the feedback link from your browser address bar after opening: '+feedbackURL());
+  });
+  document.getElementById('copyFeedback').addEventListener('click',async () => {
+    if (!count()) return;
+    const ok=await copyText(description());
+    message(ok?'Full ratings and preferences copied. Paste them into ChatGPT for more suggestions.':'Select and copy this summary: '+description());
+  });
+  paint();
+})();
+</script></body></html>
